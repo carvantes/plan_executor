@@ -206,7 +206,7 @@ module Crucible
           resource.subject.display = 'Patient'
         end
         resource.code = minimal_codeableconcept(system,code, namespace)
-        resource.verificationStatus = 'confirmed'
+        resource.verificationStatus = minimal_codeableconcept('http://terminology.hl7.org/CodeSystem/condition-ver-status', 'confirmed')
         tag_metadata(resource)
       end
 
@@ -678,7 +678,7 @@ module Crucible
             p.searchType = nil unless p.type == 'string'
           end
         when FHIR::Patient
-          resource.maritalStatus = minimal_codeableconcept('http://hl7.org/fhir/v3/MaritalStatus','S')
+          resource.maritalStatus = minimal_codeableconcept('http://terminology.hl7.org/CodeSystem/v3-MaritalStatus','S')
         when FHIR::PlanDefinition
           resource.action.each do |a|
             a.action.each do |b|
@@ -1463,7 +1463,7 @@ module Crucible
             p.searchType = nil unless p.type == 'string'
           end
         when FHIR::STU3::Patient
-          resource.maritalStatus = minimal_codeableconcept('http://hl7.org/fhir/v3/MaritalStatus','S', FHIR::STU3)
+          resource.maritalStatus = minimal_codeableconcept('http://terminology.hl7.org/CodeSystem/v3-MaritalStatus','S', FHIR::STU3)
         when FHIR::STU3::PlanDefinition
           resource.action.each do |a|
             a.action.each do |b|
@@ -2070,7 +2070,7 @@ module Crucible
         when FHIR::DSTU2::Order
           resource.when.schedule = nil
         when FHIR::DSTU2::Patient
-          resource.maritalStatus = minimal_codeableconcept('http://hl7.org/fhir/v3/MaritalStatus','S', FHIR::DSTU2)
+          resource.maritalStatus = minimal_codeableconcept('http://terminology.hl7.org/CodeSystem/v3-MaritalStatus','S', FHIR::DSTU2)
           resource.communication.each do |communication|
             communication.language.coding.each do |c|
               c.system = 'http://tools.ietf.org/html/bcp47'
